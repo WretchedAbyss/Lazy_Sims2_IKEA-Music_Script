@@ -2,7 +2,7 @@
 
 This script is for easy moving of files and amending files in order to restore some of the lost content in **The Sims 2**.
 
-## Download
+## Orginal Game Archive to get the stuff they removed
 
 [Download Here](https://archive.org/details/20200917-141140)
 
