@@ -16,9 +16,7 @@ Extract its files until they are folders like so:
 
 Then, using the console:
 
-```python
-'.\Sims 2 Music and Ikea Lazy Script.py'
-```
+``` python '.\Sims2_M&I_Lazy.py'```
     Select the archived version of the game.
     Then, select the location of your Steam Sims 2 install.
 
