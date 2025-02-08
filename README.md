@@ -4,7 +4,7 @@ This script is for easy moving of files and amending files in order to restore s
 
 ## Orginal Game Archive to get the stuff they removed
 
-[Download Here](https://archive.org/details/20200917-141140)
+Your gonna need this, your gonna need to find it, sorry(though if you have a copy, the only issue should come from the merge of the Ikea pack)
 
 ## Extraction
 
