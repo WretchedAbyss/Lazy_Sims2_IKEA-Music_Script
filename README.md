@@ -31,3 +31,7 @@ Then, using the console:
 
 ## Why Use This Script?
     One could do all this manually, but automating makes things a lot easier.
+
+## License
+
+    This project is released under [The Unlicense](LICENSE). Feel free to use it however you like, but remember, if you find it useful, send me a postcard!
