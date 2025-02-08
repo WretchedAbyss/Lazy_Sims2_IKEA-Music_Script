@@ -1,6 +1,6 @@
 # Sims 2 Content Restoration Script
 
-This script is for easy moving of files and amending files in order to restore some of the lost content in **The Sims 2**.
+    This script is for easy moving of files and amending files in order to restore some of the lost content in **The Sims 2**.
 
 ## Orginal Game Archive to get the stuff they removed
 
@@ -8,7 +8,7 @@ This script is for easy moving of files and amending files in order to restore s
 
 ## Extraction
 
-Extract its files until they are folders like so:
+    Extract its files until they are folders like so:
 
 ![image](https://github.com/user-attachments/assets/dee96107-3849-496f-b2ad-0be592a3963d)
 
@@ -17,6 +17,7 @@ Extract its files until they are folders like so:
 Then, using the console:
 
 ``` python '.\Sims2_M&I_Lazy.py'```
+
     Select the archived version of the game.
     Then, select the location of your Steam Sims 2 install.
 
@@ -29,4 +30,4 @@ Then, using the console:
 
 
 ## Why Use This Script?
-One could do all this manually, but automating makes things a lot easier.
+    One could do all this manually, but automating makes things a lot easier.
