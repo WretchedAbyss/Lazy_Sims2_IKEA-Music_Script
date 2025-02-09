@@ -8,40 +8,40 @@ def copy_files(source_folder, install_location):
     # Define paths relative to the source and destination
     files_to_copy = [
         {
-            'source': os.path.join(source_folder, "The Sims 2 University", "TSData", "Res", "Sound", "CollegeRock.package"),
+            'source': os.path.join(source_folder, "University Life","EP1", "TSData", "Res", "Sound", "CollegeRock.package"),
             'dest': os.path.join(install_location, "EP1", "TSData", "Res", "Sound", "CollegeRock.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Open For Business", "TSData", "Res", "Sound", "NewWave.package"),
+            'source': os.path.join(source_folder, "Best of Business","EP3", "TSData", "Res", "Sound", "NewWave.package"),
             'dest': os.path.join(install_location, "EP3", "TSData", "Res", "Sound", "NewWave.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Bon Voyage", "TSData", "Res", "Sound", "Reggae.package"),
+            'source': os.path.join(source_folder, "Bon Voyage", "TSData", "Res", "Sound", "Reggae.package"),
             'dest': os.path.join(install_location, "EP6", "TSData", "Res", "Sound", "Reggae.package")
         },
         # New untested stuff
         {
-            'source': os.path.join(source_folder, "The Sims 2 FreeTime", "TSData", "Res", "Sound", "Pop.package"),
+            'source': os.path.join(source_folder, "Free Time", "TSData", "Res", "Sound", "Pop.package"),
             'dest': os.path.join(install_location, "EP7", "TSData", "Res", "Sound", "Pop.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Apartment Life", "TSData", "Res", "Sound", "CollegeRock.package"),
+            'source': os.path.join(source_folder, "Apartment Life", "TSData", "Res", "Sound", "CollegeRock.package"),
             'dest': os.path.join(install_location, "EP8", "TSData", "Res", "Sound", "CollegeRock.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Apartment Life", "TSData", "Res", "Sound", "Pop.package"),
+            'source': os.path.join(source_folder, "Apartment Life", "TSData", "Res", "Sound", "Pop.package"),
             'dest': os.path.join(install_location, "EP8", "TSData", "Res", "Sound", "Pop.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 H&M® Fashion Stuff", "TSData", "Res", "Sound", "Pop.package"),
+            'source': os.path.join(source_folder, "Best of Business","SP5", "TSData", "Res", "Sound", "Pop.package"),
             'dest': os.path.join(install_location, "SP5", "TSData", "Res", "Sound", "Pop.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Teen Style Stuff", "TSData", "Res", "Sound", "Metal.package"),
+            'source': os.path.join(source_folder, "University Life","SP6", "TSData", "Res", "Sound", "Metal.package"),
             'dest': os.path.join(install_location, "SP6", "TSData", "Res", "Sound", "Metal.package")
         },
         {
-            'source': os.path.join(source_folder, "The Sims 2 Kitchen & Bath Interior Design Stuff", "TSData", "Res", "Sound", "Salsa.package"),
+            'source': os.path.join(source_folder, "Best of Business","SP7", "TSData", "Res", "Sound", "Salsa.package"),
             'dest': os.path.join(install_location, "SP7", "TSData", "Res", "Sound", "Salsa.package")
         }
     ]
@@ -62,39 +62,33 @@ def copy_files(source_folder, install_location):
         except Exception as e:
             print(f"Unexpected error occurred while copying {file_info['source']}. Error: {e}")
 
-def copy_and_merge_folders(source_folder, install_location):
-    # Paths for IKEA folders within the source folder
-    ikea_original = os.path.join(source_folder, "The Sims 2 IKEA® Home Stuff")
-    ikea_fix = os.path.join(source_folder, "The Sims 2 IKEA Home Stuff TS2 UC FIX")
-    sp8_folder = os.path.join(install_location, "SP8")
+def copy_sp8(source_folder, destination_folder):
+    # Find SP8 in the source folder
+    for root, dirs, files in os.walk(source_folder):
+        if 'SP8' in dirs or 'SP8' in files:
+            sp8_path = os.path.join(root, 'SP8')
+            break
+    else:
+        raise FileNotFoundError("SP8 file or directory not found in the source folder.")
 
-    # Ensure the SP8 folder exists
-    if not os.path.exists(sp8_folder):
-        os.makedirs(sp8_folder)
-    
-    # First, copy contents of "The Sims 2 IKEA® Home Stuff"
-    for root, _, files in os.walk(ikea_original):
-        for file in files:
-            source_path = os.path.join(root, file)
-            relative_path = os.path.relpath(source_path, ikea_original)
-            dest_path = os.path.join(sp8_folder, relative_path)
-            
-            if not os.path.exists(os.path.dirname(dest_path)):
-                os.makedirs(os.path.dirname(dest_path))
-            
-            shutil.copy2(source_path, dest_path)
+    # Destination path for SP8
+    sp8_destination = os.path.join(destination_folder, "SP8")
 
-    # Then, copy contents of "The Sims 2 IKEA Home Stuff TS2 UC FIX", overwriting any duplicates
-    for root, _, files in os.walk(ikea_fix):
-        for file in files:
-            source_path = os.path.join(root, file)
-            relative_path = os.path.relpath(source_path, ikea_fix)
-            dest_path = os.path.join(sp8_folder, relative_path)
-            
-            if not os.path.exists(os.path.dirname(dest_path)):
-                os.makedirs(os.path.dirname(dest_path))
-            
-            shutil.copy2(source_path, dest_path)
+    # If SP8 is a directory, use copytree; if it's a file, use copy2
+    if os.path.isdir(sp8_path):
+        # Ensure the destination directory for SP8 exists
+        if not os.path.exists(destination_folder):
+            os.makedirs(destination_folder)
+        shutil.copytree(sp8_path, sp8_destination)
+    else:
+        # Ensure the destination directory exists for the file
+        if not os.path.exists(os.path.dirname(sp8_destination)):
+            os.makedirs(os.path.dirname(sp8_destination))
+        shutil.copy2(sp8_path, sp8_destination)
+
+    print(f"Successfully copied SP8 to {destination_folder}")
+# Example usage:
+# copy_folder('/path/to/source/SP8', '/path/to/destination')
 
 def amend_vdf_file(install_location):
     vdf_file_path = os.path.join(install_location, "3314070_install.vdf")
@@ -155,7 +149,7 @@ if __name__ == "__main__":
     Tk().withdraw() 
 
     # Ask for the source folder for Music Files
-    source_folder = askdirectory(title="Select Source The Sims 2: Ultimate Collection")
+    source_folder = askdirectory(title="Select Source The Sims 2 Starter Pack:")
     
     if not source_folder:
         print("No source folder selected, operation cancelled.")
@@ -167,5 +161,5 @@ if __name__ == "__main__":
             print("No install location selected, operation cancelled.")
         else:
             copy_files(source_folder, install_location)
-            copy_and_merge_folders(source_folder, install_location)
+            copy_sp8(source_folder, install_location)
             amend_vdf_file(install_location)
